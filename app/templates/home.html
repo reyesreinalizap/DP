@@ -1,0 +1,247 @@
+<!doctype html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <title>Home</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://openlayers.org/en/v4.6.5/css/ol.css" type="text/css">
+  </head>
+
+  <nav class="navbar navbar-expand-lg navbar-gray bg-gray">
+    <a class="navbar-brand" href="#">Life Sagip</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+ 
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="#">Home </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Registered </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">History</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Emergency</a>
+        </li>
+      </ul>
+      <span class="navbar-item">
+        <a class="nav-link" href="#">Log-out</a>
+      </span>
+    </div>
+  </nav>
+
+
+
+  <body>
+    {% block body %}
+  <div id="map"></div>
+   <div class="container">
+      <div class="row">    
+           <div class="col-md-4 sidenav">
+             <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+               <li class="nav-item">
+                 <a class="nav-link active" data-toggle="tab" href="#passenger">Passenger
+                 </a>   
+                </li>
+                <li class="nav-item">
+                 <a class="nav-link" data-toggle="tab" href="#rescuer">Rescuer</a>
+               </li>
+        
+            </ul>
+
+
+
+   
+            
+             <!-- Tab panes -->
+             <div class="tab-content">
+                <div id="passenger" class=" tab-pane active"><br>
+                  <form method="get" action="/search" id="search">
+                    <input name="q" type="text" size="40" placeholder="Search..." /> 
+                    <button type="button" class="btn btn-light btn-sm"><i class="fa fa-search"></i> </button>            
+                    <button type="button" class="btn btn-secondary btn-sm btn-refresh"><i class="fa fa-refresh"></i> </button>
+                    <button type="button" class="btn btn-success btn-sm btn-add" data-toggle="modal" data-target="#passengermodal"><i class="fa fa-plus"></i> </button>
+                  
+                  </form>
+      
+                  <table class="table table-striped">
+                    <tr>
+                      <th>Serial</th>
+                      <th>Name</th>
+        
+                    </tr>
+                    <tr>
+                      <td>01</td>
+                      <td>Reina</td>
+    
+                      <td>
+                        <button type="button" class="btn btn-danger btn-sm" datatoggle="modal" onclick="return confirm('Are you sure to delete?')"><i class="fa fa-trash"></i> </button>
+                      </td>
+                    </tr>
+                  </table>
+                    
+                </div>
+                <div id="rescuer" class="tab-pane fade"><br>
+                  <form method="get" action="/search" id="search">
+                    <input name="q" type="text" size="40" placeholder="Search..." /> 
+                    <button type="button" class="btn btn-light btn-sm"><i class="fa fa-search"></i> </button>            
+                    <button type="button" class="btn btn-secondary btn-sm btn-refresh"><i class="fa fa-refresh"></i> </button>
+                    <button type="button" class="btn btn-success btn-sm btn-add" data-toggle="modal" data-target="#rescuermodal"><i class="fa fa-plus"></i> </button>
+                  
+                  </form>
+      
+                    <h3>rescuer</h3>
+                    <p></p>
+                </div>
+               
+
+
+  
+      
+
+          
+              </div>
+            </div>
+      </div>
+
+               
+
+  <!-- The Modal -->
+  <div class="modal fade" id="passengermodal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Insert Passenger Details</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <!-- Modal body -->
+        <div class="modal-body">
+          <form action="" method="POST">
+
+
+            <div class="form-group">
+
+
+               <label>ID:</label>
+               <input type="text" class="form-control" name="rfid" required="1">
+
+
+            </div>
+
+
+             <div class="form-group">
+
+
+               <label>Name:</label>
+               <input type="text" class="form-control" name="name" required="1">
+
+
+            </div>
+
+
+             <div class="form-group" required="1">
+
+
+               <label>Gender:</label>
+               <input type="radio" name="gender" value="male" > Male
+               <input type="radio" name="gender" value="female"> Female
+
+            </div>
+
+            
+
+            <div class="form-group">
+
+
+              <label>Age:</label>
+              <input type="text" class="form-control" name="age" required="1">
+
+
+           </div>
+
+           <div class="form-group">
+
+
+            <label>Contact Number:</label>
+            <input type="text" class="form-control" name="contact" required="1">
+
+
+         </div>
+
+         <div class="form-group">
+
+
+          <label>Address:</label>
+          <input type="text" class="form-control" name="address" required="1">
+
+
+       </div>
+
+
+
+            <div class="form-group">
+
+              <div class="col text-center">
+               <button class="btn btn-primary" type="submit">Insert Data</button>
+
+</div>
+            </div>
+
+
+         </form>
+        </div>
+        
+
+        
+      </div>
+    </div>
+  </div>
+    </div>
+
+    
+    
+    {% endblock %}
+
+   
+
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+
+  </body>
+
+  <script>
+    $('[data-dismiss=modal]').on('click', function (e) {
+    var $t = $(this),
+        target = $t[0].href || $t.data("target") || $t.parents('.modal') || [];
+
+  $(target)
+    .find("input,textarea,select")
+       .val('')
+       .end()
+    .find("input[type=checkbox], input[type=radio]")
+       .prop("checked", "")
+       .end();
+})
+    </script>
+
+
+  <script src="https://openlayers.org/en/v4.6.5/build/ol.js" type="text/javascript"></script>
+ <!-- Openlayesr JS fIle -->
+ <script type="text/javascript" src="{{ url_for('static', filename='map.js') }}" type="text/javascript"></script>
+
+</html>
+
