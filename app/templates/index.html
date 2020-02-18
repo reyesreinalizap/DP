@@ -35,33 +35,34 @@
                  <button type="button" class="btn btn-secondary btn-sm btn-refresh"><i class="fa fa-refresh"></i> </button>
                  <button type="button" class="btn btn-success btn-sm btn-add" data-toggle="modal" data-target="#passengermodal"><i class="fa fa-plus"></i> </button>
                </form>
-               <table class="table table-hover table-dark">
- 
-                <tr>
-
-                    <th>RFID</th>
-                    <th>Name</th>
-                
-
-                </tr>
-
-
                {% for row in passengers %}
-                <tr>
-                    <td>{{row.rfid}}</td>
-                    <td>{{row.name}}</td>
-                
+               <div class="list-group">
+                <a href="#" class="list-group-item">
+                     
+                    <td>P{{row.id}}</td>
+                    <br>RFID: {{row.rfid}} Pulse:</br>                   
+                    <br>Name: {{row.name}}</br>
+                    <br>Longitude:</br>
+                    <br>Latitude:</br>
+                    <td>Status:</td>   
+                    <a href="/delete/{{row.rfid}}" type="submit" class="btn btn-danger btn-sm" value="Delete" datatoggle="modal" onclick="return confirm('Are you sure to delete?')"><i class="fa fa-trash"></i></a>
+                    </a>
+                    
 
-                    <td>
-                      
-                        <a href="/delete/{{row.rfid}}" type="submit" class="btn btn-danger btn-sm" value="Delete" data-toggle="modal" onclick="return confirm('Are you sure to delete?')"><i class="fa fa-trash"></i></a>
+              </div> 
+       
+            
+               
 
-                    </td>
+               
 
-                </tr>
+ 
+
+              
 
                 {% endfor %}
-                </table>
+           
+          
                
              </div>
                 <div id="rescuer" class="tab-pane fade"><br>
