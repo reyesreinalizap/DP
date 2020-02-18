@@ -30,7 +30,8 @@ def __repr__(self):
     
 @app.route('/')
 def index():
-    return render_template('index.html', title='Home')
+    passenger_data= Passenger.query.all()
+    return render_template('index.html', title='Home',passengers=passenger_data)
 
 @app.route('/insert', methods = ['GET','POST'])
 def insert():
@@ -45,18 +46,18 @@ def insert():
         passenger = Passenger(rfid=request.form.get('rfid'),name=request.form.get('name'),age=request.form.get('age'),gender=request.form.get('gender'),contact=request.form.get('contact'),address=request.form.get('address'))
         db.session.add(passenger)
         db.session.commit()
-        passengers = Passenger.query.all()
 
         return redirect(url_for('index')) 
-    return render_template("index.html", passengers=passengers)
+    return render_template("index.html")
 
-@app.route("/delete", methods=["POST"])
-def delete():
-    rfid = request.form.get("rfid")
-    passenger = Passenger.query.filter_by(rfid=rfid).first()
+
+@app.route('/delete/<rfid>/', methods = ['GET', 'POST'])
+def delete(rfid):
+    passenger = Passenger.query.filter_by(rfid=rfid).first_or_404()
     db.session.delete(passenger)
     db.session.commit()
-    return redirect("/")
+    return redirect(url_for('index')) 
+
 
 if __name__ == "__main__":
     app.run(debug=True)
