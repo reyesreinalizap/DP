@@ -54,13 +54,14 @@
 
                     <td>
                       
-                        <a href="/delete/{{row.rfid}}" type="button" class="btn btn-danger btn-sm" value="Delete" datatoggle="modal" onclick="return confirm('Are you sure to delete?')"><i class="fa fa-trash"></i></a>
+                        <a href="/delete/{{row.rfid}}" type="submit" class="btn btn-danger btn-sm" value="Delete" data-toggle="modal" onclick="return confirm('Are you sure to delete?')"><i class="fa fa-trash"></i></a>
 
                     </td>
 
                 </tr>
 
                 {% endfor %}
+                </table>
                
              </div>
                 <div id="rescuer" class="tab-pane fade"><br>
@@ -68,7 +69,7 @@
                     <input name="q" type="text" size="40" placeholder="Search..." /> 
                     <button type="button" class="btn btn-light btn-sm"><i class="fa fa-search"></i> </button>            
                     <button type="button" class="btn btn-secondary btn-sm btn-refresh"><i class="fa fa-refresh"></i> </button>
-                    <button type="button" class="btn btn-success btn-sm btn-add" data-toggle="modal" data-target="#rescuermodal"><i class="fa fa-plus"></i> </button>
+                    <button type="button" class="btn btn-success btn-sm btn-add" datatoggle="modal" data-target="#rescuermodal"><i class="fa fa-plus"></i> </button>
                 
                 </form>
     
@@ -79,10 +80,10 @@
         </div>
    </div>
 
-            
+
 
         <!-- The Modal -->
-    <div class="modal fade" id="passengermodal">
+    <div class="modal fade" id="passengermodal" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
         
