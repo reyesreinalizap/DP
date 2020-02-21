@@ -1,4 +1,5 @@
 import os
+from datetime import datetime
 from flask import Flask,render_template,url_for,flash,redirect,abort,request
 from flask_sqlalchemy import SQLAlchemy
 
@@ -23,15 +24,19 @@ class Passenger(db.Model):
     lat = db.Column(db.Float, unique = False, nullable=True )
     longi = db.Column(db.Float, unique = False, nullable=True)
     pulse = db.Column(db.Float, unique = False, nullable=True)
-    flag = db.Column(db.Boolean, unique = False, nullable=True)
+    status = db.Column(db.Boolean, unique = False, nullable=True)
+    destination = db.Column(db.String(18), unique = False, nullable=False)
+    dept_time = db.Column(db.DateTime, nullable=True, default=datetime.now, unique=False)
+    post_time = db.Column(db.DateTime, nullable=True, default=datetime, unique=True)
+    arrival_time = db.Column(db.DateTime, nullable=True, default=datetime, unique=True)
 
 def __repr__(self):
-        return f"Passenger('{self.rfid}', '{self.name}', '{self.age}', '{self.gender}','{self.contact}', '{self.address}', '{self.lat}', '{self.longi}', '{self.pulse}', '{self.flag}')"
+        return f"Passenger('{self.rfid}', '{self.name}', '{self.age}', '{self.gender}','{self.contact}', '{self.address}', '{self.lat}', '{self.longi}', '{self.pulse}', '{self.status}', '{self.destination}', '{self.dept_time}', '{self.post_time}', '{self.arrival_time}')"
     
 @app.route('/')
 def index():
-    passenger_data= Passenger.query.all()
-    return render_template('index.html', title='Home',passengers=passenger_data)
+    passengers= Passenger.query.all()
+    return render_template('index.html', title='Home',passengers=passengers)
 
 @app.route('/insert', methods = ['GET','POST'])
 def insert():

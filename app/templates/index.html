@@ -7,48 +7,31 @@
 
 {% block body %}
 <div id="map"></div>
-<div class="container">
-   <div class="row">    
-        <div class="col-md-4 sidenav">
-          <!-- Nav tabs -->
-         <ul class="nav nav-tabs" role="tablist">
-            <li class="nav-item">
-              <a class="nav-link active" data-toggle="tab" href="#passenger">Passenger
-              </a>   
-             </li>
-             <li class="nav-item">
-              <a class="nav-link" data-toggle="tab" href="#rescuer">Rescuer</a>
-            </li>
-     
-         </ul>
-
-
-
+    <div class="container">
+         <div class="row">    
+            <div class="col-md-4 sidenav">
+                <center>Passengers</center>
 
          
-          <!-- Tab panes -->
-          <div class="tab-content">
-             <div id="passenger" class=" tab-pane active"><br>
+   
+      
                <form method="get" action="/search" id="search">
                  <input name="q" type="text" size="40" placeholder="Search..." /> 
                  <button type="button" class="btn btn-light btn-sm"><i class="fa fa-search"></i> </button>            
-                 <button type="button" class="btn btn-secondary btn-sm btn-refresh"><i class="fa fa-refresh"></i> </button>
+                 <button type="button" class="btn btn-secondary btn-sm btn-refresh"  onClick="window.location.reload()"><i class="fa fa-refresh"></i> </button>
                  <button type="button" class="btn btn-success btn-sm btn-add" data-toggle="modal" data-target="#passengermodal"><i class="fa fa-plus"></i> </button>
                </form>
-               {% for row in passengers %}
-               <div class="list-group">
-                <a href="#" class="list-group-item">
-                     
-                    <td>P{{row.id}}</td>
-                    <br>RFID: {{row.rfid}} Pulse:</br>                   
-                    <br>Name: {{row.name}}</br>
-                    <br>Longitude:</br>
-                    <br>Latitude:</br>
-                    <td>Status:</td>   
-                    <a href="/delete/{{row.rfid}}" type="submit" class="btn btn-danger btn-sm" value="Delete" datatoggle="modal" onclick="return confirm('Are you sure to delete?')"><i class="fa fa-trash"></i></a>
-                    </a>
-                    
 
+              {% for passenger in passengers %}
+              <div class="list-group">
+                <a href="#" class="list-group-item list-group-item-action">
+                    <p>RFID: {{passenger.rfid}} Pulse:</p>
+                    <p>Name: {{passenger.name}}</p>
+                    <p>Longitude:</p>
+                    <p>Latitude:</p>
+                    <p>Status:<button href="/delete/{{passenger.rfid}}" type="submit" class="btn btn-danger btn-sm" value="Delete" datatoggle="modal" onclick="return confirm('Are you sure to delete?')"><i class="fa fa-trash"></i></button></p>
+                    
+                </a>
               </div> 
        
             
@@ -58,28 +41,36 @@
 
  
 
+                        <!-- Trigger/Open The Modal -->
+                        <button id="myBtn">Open Modal</button>
+
+                        <!-- The Modal -->
+                        <div id="myModal" class="modal2">
+
+                        <!-- Modal content -->
+                        <div class="modal-content2">
+                         
+                            <span class="close">&times;</span>
+                         
+                            <div class="modal-body2">
+                            <p>RFID</p>
+                            <p>Name</p>
+                            <p>Age</p>
+                            <p>Status</p>
+                            </div>
+                           
+                        </div>
+
+                        </div>
+
+
               
 
                 {% endfor %}
            
           
                
-             </div>
-                <div id="rescuer" class="tab-pane fade"><br>
-                <form method="get" action="/search" id="search">
-                    <input name="q" type="text" size="40" placeholder="Search..." /> 
-                    <button type="button" class="btn btn-light btn-sm"><i class="fa fa-search"></i> </button>            
-                    <button type="button" class="btn btn-secondary btn-sm btn-refresh"><i class="fa fa-refresh"></i> </button>
-                    <button type="button" class="btn btn-success btn-sm btn-add" datatoggle="modal" data-target="#rescuermodal"><i class="fa fa-plus"></i> </button>
-                
-                </form>
-    
-                    <h3>rescuer</h3>
-                    <p></p>
-                </div>
-            </div>
-        </div>
-   </div>
+           
 
 
 
@@ -91,7 +82,7 @@
                 <!-- Modal Header -->
                 <div class="modal-header">
                     <h4 class="modal-title">Insert Passenger Details</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true"></span>&times;</button>
                 </div>
                 <!-- Modal body -->
                 <div class="modal-body">
@@ -148,9 +139,4 @@
         </div>
     </div>
 </div>
-
-
-
-
-
 {% endblock %}
